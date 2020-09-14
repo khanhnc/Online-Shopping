@@ -15,11 +15,7 @@ repositories {
 
 dependencies {
 	runtime 'com.h2database:h2:1.4.200'
-
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-
-
-
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
