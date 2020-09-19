@@ -1,7 +1,7 @@
 package com.example.demo.config;
 
-//import com.example.demo.filters.JwtRequestFilter;
-//import com.example.demo.service.CustomUserDetailsService;
+import com.example.demo.filters.JwtRequestFilter;
+import com.example.demo.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,16 +16,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @EnableWebSecurity
 public class SecutiryConfigurer extends WebSecurityConfigurerAdapter {
-//
-//    @Autowired
-//    private CustomUserDetailsService userDetailsService;
-//    @Autowired
-//    private JwtRequestFilter jwtRequestFilter;
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService);
-//    }
+
+    @Autowired
+    private CustomUserDetailsService userDetailsService;
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,18 +37,17 @@ public class SecutiryConfigurer extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
 
-//        http.csrf().disable()
-//                .authorizeRequests().antMatchers("/authenticate").permitAll().
-//                anyRequest().authenticated()
-//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.csrf().disable()
+                .authorizeRequests().antMatchers("/authenticate").permitAll().
+                anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
-
-//    @Override
-//    @Bean
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
 }
