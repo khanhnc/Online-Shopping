@@ -37,8 +37,7 @@ public class SecutiryConfigurer extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
 
-        http.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate").permitAll().
+        http.authorizeRequests().antMatchers("/authenticate").permitAll().
                 anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
@@ -49,5 +48,8 @@ public class SecutiryConfigurer extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
+    }
 }
