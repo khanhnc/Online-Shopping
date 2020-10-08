@@ -8,6 +8,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.until.JwtUntil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,20 +26,20 @@ public class HelloWorld {
     @Autowired
     private UserService userService;
 
-    @GetMapping({"/test"})
-    public String saveUsertest(){
-        System.out.println("test");
-        User user = new User("test","test");
-        this.userService.saveUser(user);
-        return "success";
-    }
-
     @RequestMapping("/hello")
     public String index() {
         System.out.println("test");
         User user = new User("test","test");
         this.userService.saveUser(user);
         return "success";
+    }
+
+    @RequestMapping("/test")
+    public User test() {
+        System.out.println("test");
+        User user = new User("test","test");
+        this.userService.saveUser(user);
+        return user;
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
