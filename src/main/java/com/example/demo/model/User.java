@@ -18,6 +18,9 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
+    public User(){
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -30,7 +33,7 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
