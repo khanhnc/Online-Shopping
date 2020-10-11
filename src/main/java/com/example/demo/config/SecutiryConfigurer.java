@@ -1,7 +1,7 @@
 package com.example.demo.config;
 
 import com.example.demo.filters.JwtRequestFilter;
-import com.example.demo.service.CustomUserDetailsService;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecutiryConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private UserService userDetailsService;
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
