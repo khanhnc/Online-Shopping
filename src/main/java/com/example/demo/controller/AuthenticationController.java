@@ -20,14 +20,26 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UserService customUserDetailsService;
+    private UserService userService;
     @Autowired
     private JwtUntil jwtUntil;
 
-    @RequestMapping(value="/registration", method = RequestMethod.POST)
-    public ResponseEntity<User>  signup() {
-
+    @RequestMapping(value="/checkUsername",method=RequestMethod.POST)
+    public ResponseEntity<Boolean> checkUser(@RequestBody User data){
+        return ResponseEntity.ok(userService.checkUsernameUsed(data.getUsername()));
     }
+
+    @RequestMapping(value="/checkEmail",method=RequestMethod.POST)
+    public ResponseEntity<Boolean> checkEmail(@RequestBody User data){
+        return ResponseEntity.ok(userService.checkEmailUsed(data.getEmail()));
+    }
+
+
+    //
+//    @RequestMapping(value="/registration", method = RequestMethod.POST)
+//    public ResponseEntity<User>  signup() {
+//
+//    }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)
@@ -41,7 +53,7 @@ public class AuthenticationController {
         } catch (AuthenticationException e ){
             return new ResponseEntity<String>("Invalid username or password", HttpStatus.UNAUTHORIZED);
         }
-        final UserDetails userDetails = customUserDetailsService
+        final UserDetails userDetails = userService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtUntil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));

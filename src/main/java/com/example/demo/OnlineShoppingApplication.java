@@ -16,8 +16,8 @@ public class OnlineShoppingApplication {
 	@Bean
 	public CommandLineRunner run(UserRepository userRepository) throws Exception {
 		return (String[] args) -> {
-			User user1 = new User("admin", "admin");
-			User user2 = new User("user2", "user2");
+			User user1 = new User("admin", "admin", "admin@admin.com");
+			User user2 = new User("user2", "user2","user2@admin.com");
 			userRepository.save(user1);
 			userRepository.save(user2);
 		};

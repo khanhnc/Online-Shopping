@@ -17,15 +17,24 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        System.out.println("foo" + user.getPassword() + user.getUsername());
         if(user != null) {
             return user;
     }
     throw new UsernameNotFoundException("Username not found");
     }
 
-    public User registration(User user) throws UsernameNotFoundException {
+    public void registration(User user) throws UsernameNotFoundException {
+        this.userRepository.save(user);
+    }
 
+    public boolean checkUsernameUsed(String username) {
+        User usedUser = userRepository.findByUsername(username);
+        return usedUser != null;
+    }
+
+    public boolean checkEmailUsed(String email) {
+        User usedUser = userRepository.findByEmail(email);
+        return usedUser != null;
     }
 
 }
