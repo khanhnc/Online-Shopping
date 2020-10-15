@@ -23,8 +23,8 @@ public class UserService implements UserDetailsService {
     throw new UsernameNotFoundException("Username not found");
     }
 
-    public void registration(User user) throws UsernameNotFoundException {
-        this.userRepository.save(user);
+    public User registration(User user) {
+        return this.userRepository.save(user);
     }
 
     public boolean checkUsernameUsed(String username) {

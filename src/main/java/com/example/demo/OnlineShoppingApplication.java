@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class OnlineShoppingApplication {
@@ -16,8 +17,11 @@ public class OnlineShoppingApplication {
 	@Bean
 	public CommandLineRunner run(UserRepository userRepository) throws Exception {
 		return (String[] args) -> {
-			User user1 = new User("admin", "admin", "admin@admin.com");
-			User user2 = new User("user2", "user2","user2@admin.com");
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String adminPass = encoder.encode("admin");
+			String userPass = encoder.encode("user");
+			User user1 = new User("admin", adminPass, "admin@admin.com");
+			User user2 = new User("user2", userPass ,"user2@admin.com");
 			userRepository.save(user1);
 			userRepository.save(user2);
 		};
