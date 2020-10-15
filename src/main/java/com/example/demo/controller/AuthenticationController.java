@@ -15,6 +15,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 public class AuthenticationController {
     @Autowired
@@ -57,7 +59,8 @@ public class AuthenticationController {
         final UserDetails userDetails = userService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtUntil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        final Date expirationDate = jwtUntil.extractExpiration(jwt);
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, expirationDate.getTime()));
     }
 
 }
