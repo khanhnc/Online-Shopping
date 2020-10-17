@@ -7,11 +7,11 @@ import { LoginComponent } from './auth/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { AuthService } from './auth/auth.service';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatPseudoCheckboxModule } from '@angular/material/core';
-import {AuthInterceptor} from './auth/authInterceptor'
-import {GlobalErrorHandler} from './global-error-handler'
-
+import {AuthInterceptor} from './auth/authInterceptor';
+import {GlobalErrorHandler} from './global-error-handler';
+import {AuthGuardService} from './auth/auth-guard.service';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -40,19 +40,30 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { NavigationComponent } from './navigation/navigation.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavigationComponent,
+    ProfileComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
 
+    MatButtonModule,
     MatPseudoCheckboxModule,
     MatInputModule,
     MatAutocompleteModule,
@@ -85,6 +96,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ],
   providers: [
     AuthService, 
+    AuthGuardService,
   
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   

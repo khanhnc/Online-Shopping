@@ -9,13 +9,13 @@ import {AuthService} from "./auth.service"
 })
 export class LoginComponent {
 
-    user: User = {username:'admsin', password:'admin',email:'test'};
+    user: User = {username:'', password:'',email:''};
 
     constructor(private authService: AuthService, private http: HttpClient) {
-      console.log("login workds")
     }
 
     login(){
+      console.log(this.user)
       this.authService.login(this.user.username, this.user.password).subscribe(res=>{
         console.log("rep", res)
       });
