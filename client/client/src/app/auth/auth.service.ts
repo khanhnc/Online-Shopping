@@ -5,14 +5,16 @@ import { User } from "../model";
 import { shareReplay, tap } from 'rxjs/operators';
 
 @Injectable()
-export class AuthService{
+export class AuthService{   
 
     constructor(private http: HttpClient){}
 
     login(username: string, password:string) {
         return this.http.post<User>("/api/authenticate", {username, password})
         .pipe(
-            tap(res => this.setSession(res)),
+            tap(res => {
+                this.setSession(res);
+            }),
             shareReplay()
         )
     }

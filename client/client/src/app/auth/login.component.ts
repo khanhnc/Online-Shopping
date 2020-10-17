@@ -9,7 +9,7 @@ import {AuthService} from "./auth.service"
 })
 export class LoginComponent {
 
-    user: User = {username:'admin', password:'admin',email:'test'};
+    user: User = {username:'admsin', password:'admin',email:'test'};
 
     constructor(private authService: AuthService, private http: HttpClient) {
       console.log("login workds")

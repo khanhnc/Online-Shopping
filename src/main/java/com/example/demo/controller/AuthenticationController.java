@@ -36,6 +36,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(userService.checkEmailUsed(data.getEmail()));
     }
 
+    @RequestMapping(value="/hello",method=RequestMethod.GET)
+    public String  hello(){
+        return "hello";
+    }
 
 
     @RequestMapping(value="/registration", method = RequestMethod.POST)

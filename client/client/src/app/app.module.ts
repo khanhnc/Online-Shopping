@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,8 +7,10 @@ import { LoginComponent } from './auth/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { AuthService } from './auth/auth.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatPseudoCheckboxModule } from '@angular/material/core';
+import {AuthInterceptor} from './auth/authInterceptor'
+import {GlobalErrorHandler} from './global-error-handler'
 
 
 import {MatInputModule} from '@angular/material/input';
@@ -81,7 +83,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatSortModule,
     MatPaginatorModule
     ],
-  providers: [AuthService ],
+  providers: [
+    AuthService, 
+  
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  
+    {provide: ErrorHandler, useClass: GlobalErrorHandler}
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
