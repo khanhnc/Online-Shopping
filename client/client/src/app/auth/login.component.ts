@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { User } from '../model';
 import {AuthService} from "./auth.service"
@@ -10,12 +11,11 @@ export class LoginComponent {
 
     user: User = {username:'admin', password:'admin',email:'test'};
 
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService, private http: HttpClient) {
       console.log("login workds")
     }
 
     login(){
-      console.log("submit")
       this.authService.login(this.user.username, this.user.password).subscribe(res=>{
         console.log("rep", res)
       });
