@@ -1,6 +1,7 @@
 package com.example.demo.until;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,7 @@ public class JwtUntil {
     }
 
     public Date extractExpiration(String token){
-        return extractClaim(token, Claims::getExpiration);
+            return extractClaim(token, Claims::getExpiration);
     }
 
     public <T> T extractClaim(String token, Function<Claims,T> claimsResolver){
@@ -29,8 +30,8 @@ public class JwtUntil {
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token){
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+    private Claims extractAllClaims(String token) throws ExpiredJwtException{
+            return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
     private Boolean isTokenExpired(String token){

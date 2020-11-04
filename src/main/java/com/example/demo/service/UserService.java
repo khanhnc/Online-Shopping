@@ -23,6 +23,11 @@ public class UserService implements UserDetailsService {
     throw new UsernameNotFoundException("Username not found");
     }
 
+    public User getUserProfile(String username) {
+        User user = userRepository.findByUsername(username);
+        return user;
+    }
+
     public User registration(User user) {
         return this.userRepository.save(user);
     }

@@ -12,6 +12,8 @@ import { MatPseudoCheckboxModule } from '@angular/material/core';
 import {AuthInterceptor} from './auth/authInterceptor';
 import {GlobalErrorHandler} from './global-error-handler';
 import {AuthGuardService} from './auth/auth-guard.service';
+import {ProfileService} from './profile/profile.service'
+
 
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -97,6 +99,7 @@ import { ProfileComponent } from './profile/profile.component';
   providers: [
     AuthService, 
     AuthGuardService,
+    ProfileService,
   
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   
