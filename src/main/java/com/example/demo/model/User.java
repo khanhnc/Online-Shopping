@@ -1,11 +1,8 @@
 package com.example.demo.model;
 
-import org.springframework.lang.NonNull;
-import org.springframework.lang.NonNullFields;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -25,7 +22,6 @@ public class User implements UserDetails {
     @Email
     @NotNull
     private String email;
-    private String fullname;
 
     public User(){
     }

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.AuthenticationRequest;
 import com.example.demo.model.AuthenticationResponse;
+import com.example.demo.model.ClientUser;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.until.JwtUntil;
@@ -26,7 +27,11 @@ public class ProfileController {
     @RequestMapping(value="/profile", method = RequestMethod.POST)
     public ResponseEntity<User> getProfile(Principal principal) {
         String loggedUsername = principal.getName();
-        return new ResponseEntity<User>( userService.getUserProfile(loggedUsername),HttpStatus.ACCEPTED);
+        User user = userService.getUserProfile(loggedUsername);
+        ClientUser clientUser = new ClientUser();
+        clientUser.setUsername(user.getUsername());
+        clientUser.setEmail(user.getEmail());
+        return new ResponseEntity<ClientUser>( clientUser,HttpStatus.ACCEPTED);
     }
 
 
