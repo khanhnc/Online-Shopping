@@ -41,9 +41,8 @@ public class AuthenticationController {
         return "hello";
     }
 
-
     @RequestMapping(value="/registration", method = RequestMethod.POST)
-    public ResponseEntity<User>  signup(@RequestBody User user) {
+    public ResponseEntity<User> signup(@RequestBody User user) {
         User savedUser = userService.registration(user);
         return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
     }

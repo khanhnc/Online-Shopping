@@ -13,10 +13,10 @@ repositories {
 }
 
 dependencies {
-	runtime 'com.h2database:h2:1.4.200'
+	//runtime 'com.h2database:h2:1.4.200'
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.2.6.RELEASE'
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
 
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

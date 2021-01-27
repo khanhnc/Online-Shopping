@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class ClientUser implements UserDetails {
+public class ClientUser {
     private String username;
     private String email;
 

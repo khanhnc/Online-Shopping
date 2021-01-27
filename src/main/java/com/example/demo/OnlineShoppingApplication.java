@@ -19,9 +19,9 @@ public class OnlineShoppingApplication {
 		return (String[] args) -> {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String adminPass = encoder.encode("admin");
-			String userPass = encoder.encode("user");
+			String userPass = encoder.encode("admin");
 			User user1 = new User("admin", adminPass, "admin@admin.com");
-			User user2 = new User("user2", userPass ,"user2@admin.com");
+			User user2 = new User("test", userPass ,"user2@admin.com");
 			userRepository.save(user1);
 			userRepository.save(user2);
 		};
