@@ -47,7 +47,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { LoginGuardService } from './auth/login-guard.service'
 
 @NgModule({
   declarations: [
@@ -99,6 +99,7 @@ import { ProfileComponent } from './profile/profile.component';
   providers: [
     AuthService, 
     AuthGuardService,
+    LoginGuardService,
     ProfileService,
   
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

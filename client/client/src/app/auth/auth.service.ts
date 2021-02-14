@@ -3,11 +3,12 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http"
 import { User } from "../model";
 import { shareReplay, tap } from 'rxjs/operators';
+import { Router } from "@angular/router";
 
 @Injectable()
 export class AuthService{   
-
-    constructor(private http: HttpClient){}
+    redirectUrl: string = '';
+    constructor(private http: HttpClient, private router: Router){}
 
     login(username: string, password:string) {
         return this.http.post<User>("/api/authenticate", {username, password})
@@ -43,4 +44,8 @@ export class AuthService{
         let expiresAt = JSON.parse(expiration);
         return moment(expiresAt);
     } 
+
+    redirectUrlAfterLogin(){
+        this.router.navigate([this.redirectUrl]);
+    }
 }
