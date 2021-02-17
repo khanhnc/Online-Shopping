@@ -43,7 +43,7 @@ public class AuthenticationController {
 
     @RequestMapping(value="/registration", method = RequestMethod.POST)
     public ResponseEntity<User> signup(@RequestBody User user) {
-        User savedUser = userService.registration(user);
+        User savedUser = userService.save(user);
         return new ResponseEntity<User>(savedUser, HttpStatus.CREATED);
     }
 
@@ -59,7 +59,7 @@ public class AuthenticationController {
         } catch (AuthenticationException e ){
             return new ResponseEntity<String>("Invalid username or password", HttpStatus.UNAUTHORIZED);
         }
-        final UserDetails userDetails = userService
+        final User userDetails = userService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtUntil.generateToken(userDetails);
         final Date expirationDate = jwtUntil.extractExpiration(jwt);

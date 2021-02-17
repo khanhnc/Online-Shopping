@@ -1,5 +1,6 @@
 package com.example.demo.filters;
 
+import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.until.JwtUntil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if(username !=null && SecurityContextHolder.getContext().getAuthentication() ==null) {
-            UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(username);
+            User userDetails = this.customUserDetailsService.loadUserByUsername(username);
             if(jwtUtil.validateToken(jwt, userDetails)){
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,null, userDetails.getAuthorities());
+                        userDetails,null, null);
                 usernamePasswordAuthenticationToken
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
